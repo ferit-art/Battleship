@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "8NtKFAgteIY=",
+  "success": true,
+  "projectFilePath": "/home/ferit/Projects/Battleship/Battleship/Battleship.csproj",
+  "expectedPackageFiles": [
+    "/home/ferit/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.10/microsoft.aspnetcore.app.ref.10.0.10.nupkg.sha512"
+  ],
+  "logs": []
+}
