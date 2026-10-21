@@ -2,22 +2,23 @@ namespace Battleship;
 
 public class Coordinate
 {
-    public string FromBoard { get; }
-    private char Axis { get; }
-    private int Value { get; }
+    public string Board { get; }
+    private int XValue { get; }
+    private int YValue { get; }
     public string Status { get; private set; }
 
-    public Coordinate(char axis, int value, string board)
+    public Coordinate(int xValue, int yValue, string board)
     {
-        Axis = axis;
-        Value = value;
-        FromBoard = board;
+        XValue = xValue;
+        YValue = yValue;
+        Board = board;
         Status = "";
     }
 
+    //  Maybe move the if comparisons to the Board.cs and make it even simpler in the Change methods.
     public void ChangeToHit(Person person)
     {
-        if (person.HitBoard == FromBoard)
+        if (person.HitBoard == Board)
         {
             Status = "Hit";
         }
@@ -25,7 +26,7 @@ public class Coordinate
     
     public void ChangeToMiss(Person person)
     {
-        if (person.HitBoard == FromBoard)
+        if (person.HitBoard == Board)
         {
             Status = "Miss";
         }
@@ -33,6 +34,6 @@ public class Coordinate
 
     public string ToText()
     {
-        return $"{Axis}{Value}";
+        return $"({XValue},{YValue})";
     }
 }
