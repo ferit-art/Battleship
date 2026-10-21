@@ -16,20 +16,9 @@ public class Coordinate
     }
 
     //  Maybe move the if comparisons to the Board.cs and make it even simpler in the Change methods.
-    public void ChangeToHit(Person person)
+    public void ChangeStatus(string statusNew)
     {
-        if (person.HitBoard == Board)
-        {
-            Status = "Hit";
-        }
-    }
-    
-    public void ChangeToMiss(Person person)
-    {
-        if (person.HitBoard == Board)
-        {
-            Status = "Miss";
-        }
+        Status = statusNew;
     }
 
     public string ToText()
