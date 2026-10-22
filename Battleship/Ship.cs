@@ -1,13 +1,13 @@
 namespace Battleship;
 
-public class Ship
+public abstract class Ship
 {
     public Person Owner { get; }
     private int Lenght { get; }
-    private List<Coordinate> Location { get;  }
+    private List<Coordinate> Location { get; }
     public bool Sunken { get; private set; }
 
-    public Ship(Person owner, int lenght, List<Coordinate> location)
+    protected Ship(Person owner, int lenght, List<Coordinate> location)
     {
         Owner = owner;
         Lenght = lenght;
@@ -27,6 +27,20 @@ public class Ship
             int targetIndex = Location.IndexOf(target);
             Location[targetIndex].ChangeStatus("Hit");
             Location.Remove(target);
+            
+            bool sunken = false;
+            foreach (var c in Location)
+            {
+                if (c.Status == "Hit")
+                {
+                    sunken = true;
+                }   
+            }
+
+            if (sunken)
+            {
+                Sink(attacker);
+            }
         }
     }
 }

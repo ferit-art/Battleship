@@ -10,11 +10,11 @@ public class Board
         Color = color;
 
         CoordinateLayout= new List<Coordinate>();
-        for (int i = 1; i <= 10; i++)
+        for (int i = 0; i <= 10; i++)
         {
-            for (int j = 1; j <= 10; j++)
+            for (int j = 0; j <= 10; j++)
             {
-                CoordinateLayout.Add(new Coordinate(i, j, Color));   
+                CoordinateLayout.Add(new Coordinate(i++, j++, Color));   
             }
         }
     }
