@@ -41,6 +41,9 @@ public abstract class Ship
             {
                 Sink(attacker);
             }
+        } else
+        {
+            Environment.Exit(0);
         }
     }
 }

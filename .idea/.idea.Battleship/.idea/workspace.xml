@@ -27,21 +27,27 @@
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "ferit-art"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ferit-art&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ferit-art/Battleship.git",
-    "accountId": "fd4b6120-5635-4c38-b823-deeb97912e96"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ferit-art/Battleship.git&quot;,
+    &quot;accountId&quot;: &quot;fd4b6120-5635-4c38-b823-deeb97912e96&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Battleship/Battleship.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Battleship/Board.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Battleship/Carrier.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Battleship/Destroyer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Battleship/PatrolBoat.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Battleship/Person.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Battleship/Ship.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Battleship/Submarine.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -49,67 +55,67 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="8.512839760439487E-5" />
-      <entry key="MS500" value="0.15346696048938252" />
-      <entry key="S2" value="0.6258982293872322" />
-      <entry key="S5" value="0.829183164061091" />
-      <entry key="S10" value="0.9230504637553097" />
-      <entry key="S30" value="1.3290442662355282" />
-      <entry key="S60" value="1.8301558506712823" />
-      <entry key="M2" value="2.291705666745439" />
-      <entry key="M5" value="2.6797285206244803" />
-      <entry key="M10" value="2.8329647928834207" />
-      <entry key="M15" value="2.8870497517105598" />
-      <entry key="M30" value="2.9427125361488575" />
-      <entry key="H1" value="2.971150200476218" />
-      <entry key="H2" value="2.9855232056744865" />
-      <entry key="H4" value="2.9927485816830712" />
-      <entry key="D1" value="2.9987896177398445" />
-      <entry key="W1" value="2.999827043806929" />
+      <entry key="MS100" value="5.695673978271163E-280" />
+      <entry key="MS500" value="1.4161492426964914E-56" />
+      <entry key="S2" value="1.0910965711075196E-14" />
+      <entry key="S5" value="2.6866621243750013E-6" />
+      <entry key="S10" value="0.0019056889970205904" />
+      <entry key="S30" value="0.18368668792679582" />
+      <entry key="S60" value="0.6001616596111008" />
+      <entry key="M2" value="1.0928458387837714" />
+      <entry key="M5" value="1.5695628456923367" />
+      <entry key="M10" value="1.7715788928346399" />
+      <entry key="M15" value="1.8446214289779008" />
+      <entry key="M30" value="1.9207192153010864" />
+      <entry key="H1" value="1.9622562030517385" />
+      <entry key="H2" value="2.1319579172893586" />
+      <entry key="H4" value="3.3853016232034165" />
+      <entry key="D1" value="14.571953072301879" />
+      <entry key="W1" value="21.482504225692164" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0" />
-      <entry key="M10" value="1.0" />
-      <entry key="M15" value="1.0" />
-      <entry key="M30" value="1.0" />
-      <entry key="H1" value="1.0" />
-      <entry key="H2" value="1.0" />
-      <entry key="H4" value="1.0" />
-      <entry key="D1" value="1.0" />
-      <entry key="W1" value="1.0" />
+      <entry key="S2" value="1.000000000000303" />
+      <entry key="S5" value="1.0000145321120104" />
+      <entry key="S10" value="1.0057844629103967" />
+      <entry key="S30" value="1.4603653805529744" />
+      <entry key="S60" value="2.5957144622042874" />
+      <entry key="M2" value="4.062901160391876" />
+      <entry key="M5" value="5.574048340705894" />
+      <entry key="M10" value="6.2366591497896655" />
+      <entry key="M15" value="6.479176848346405" />
+      <entry key="M30" value="6.733429510958615" />
+      <entry key="H1" value="6.872993438290206" />
+      <entry key="H2" value="7.517917563299523" />
+      <entry key="H4" value="12.446208048352897" />
+      <entry key="D1" value="48.24071334881764" />
+      <entry key="W1" value="67.0460378403803" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.022929842766320565" />
-      <entry key="MS500" value="0.6096160122364697" />
-      <entry key="S2" value="1.4394157320084078" />
-      <entry key="S5" value="1.7487376148488607" />
-      <entry key="S10" value="1.8810968854775596" />
-      <entry key="S30" value="2.3094740623993064" />
-      <entry key="S60" value="2.816856350845827" />
-      <entry key="M2" value="3.2834738770847554" />
-      <entry key="M5" value="3.6759119748507003" />
-      <entry key="M10" value="3.830953937728747" />
-      <entry key="M15" value="3.885685113449873" />
-      <entry key="M30" value="3.9420178500629257" />
-      <entry key="H1" value="3.970799701833815" />
-      <entry key="H2" value="3.985347159341894" />
-      <entry key="H4" value="3.99266035824182" />
-      <entry key="D1" value="3.998774885929868" />
-      <entry key="W1" value="3.999824938578166" />
+      <entry key="MS100" value="1.2671335354771717E-6" />
+      <entry key="MS500" value="0.06615527467969579" />
+      <entry key="S2" value="0.5071554761348624" />
+      <entry key="S5" value="0.7621925648168433" />
+      <entry key="S10" value="0.8801195122775747" />
+      <entry key="S30" value="1.5821368083508403" />
+      <entry key="S60" value="3.1433333936257024" />
+      <entry key="M2" value="5.116106309056532" />
+      <entry key="M5" value="7.122403835773761" />
+      <entry key="M10" value="7.996479559433573" />
+      <entry key="M15" value="8.315679099914654" />
+      <entry key="M30" value="8.64994269086093" />
+      <entry key="H1" value="8.83310572868837" />
+      <entry key="H2" value="9.648690001201599" />
+      <entry key="H4" value="15.830500587778499" />
+      <entry key="D1" value="62.81203207745301" />
+      <entry key="W1" value="88.52841788571702" />
     </decayedShown>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3KyWykJERBLHlucKXdSB1sW9gpq" />
   <component name="ProjectLevelVcsManager">
     <OptionsSetting value="false" id="Update" />
@@ -119,29 +125,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.Battleship.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
-    "junie.onboarding.icon.badge.shown": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.Battleship.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Battleship" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />

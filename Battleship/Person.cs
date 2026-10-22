@@ -12,7 +12,14 @@ public class Person
 
     public void AddShip(Ship ship)
     {
-        _ships.Add(ship);
+        if (ship.Owner == this)
+        {
+            _ships.Add(ship);   
+        }
+        else
+        {
+            Environment.Exit(0);
+        }
     }
 
     public void Hit(Coordinate target)
