@@ -1,6 +1,6 @@
 namespace Battleship;
 
-public class Person
+public abstract class Person
 {
     public string Name { get; }
     private List<Ship> _ships = new();
@@ -22,27 +22,16 @@ public class Person
         }
     }
 
-    public void Hit(Coordinate target)
+    public void Hit(Coordinate target, Person targetPerson)
     {
-        target.ChangeStatus("Hit");
-        Person targetPerson = null;
-        Person attacker = null;
-        
-        foreach (var person in Game.s_persons)
-        {
-            if (person != this)
-            {
-                targetPerson = person;
-            }
-            else
-            {
-                attacker = person;
-            }
-        }
+        Person attacker = this;
         
         foreach (var ship in targetPerson._ships)
         {
-            ship.TakeHit(target, attacker);
+            if (ship.ShipHit(target))
+            {
+                ship.TakeHit(target, attacker);   
+            }
         }
     }
 }

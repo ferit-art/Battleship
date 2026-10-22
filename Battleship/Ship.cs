@@ -6,7 +6,7 @@ public abstract class Ship
     private int Lenght { get; }
     private List<Coordinate> Location { get; }
     public bool Sunken { get; private set; }
-
+    
     protected Ship(Person owner, int lenght, List<Coordinate> location)
     {
         Owner = owner;
@@ -14,10 +14,19 @@ public abstract class Ship
         Location = location;
         Sunken = false;
     }
-    
+
     public void Sink(Person attacker)
     {
         Sunken = true;
+    }
+
+    public bool ShipHit(Coordinate target)
+    {
+        if (Location.Any(c => c == target))
+        {
+            return true;
+        }
+        return false;
     }
 
     public void TakeHit(Coordinate target, Person attacker)
@@ -27,21 +36,22 @@ public abstract class Ship
             int targetIndex = Location.IndexOf(target);
             Location[targetIndex].ChangeStatus("Hit");
             Location.Remove(target);
-            
+
             bool sunken = false;
             foreach (var c in Location)
             {
                 if (c.Status == "Hit")
                 {
                     sunken = true;
-                }   
+                }
             }
 
             if (sunken)
             {
                 Sink(attacker);
             }
-        } else
+        }
+        else
         {
             Environment.Exit(0);
         }
