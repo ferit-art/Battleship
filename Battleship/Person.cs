@@ -38,11 +38,4 @@ public class Person
             ship.TakeHit(target, attacker);
         }
     }
-
-    public void PlaceShip()
-    {
-        //  TODO: Loop through the Location<Coordinate> and change the Coordinate:s to the input values.
-        
-        
-    }
 }
