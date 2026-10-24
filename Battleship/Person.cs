@@ -3,11 +3,13 @@ namespace Battleship;
 public abstract class Person
 {
     public string Name { get; }
+    public Board Board { get; }
     private List<Ship> _ships = new();
     
     protected Person(string name)
     {
         Name = name;
+        Board = new Board(Name);
     }
 
     public void AddShip(Ship ship)
@@ -22,7 +24,7 @@ public abstract class Person
         }
     }
 
-    public void Hit(Coordinate target, Person targetPerson)
+    public virtual void Hit(Coordinate target, Person targetPerson)
     {
         Person attacker = this;
         
@@ -33,5 +35,8 @@ public abstract class Person
                 ship.TakeHit(target, attacker);   
             }
         }
+
+        // Complicated
+        targetPerson.Board.CoordinateLayout.First(c => c == target).ChangeStatus("Hit");
     }
 }
