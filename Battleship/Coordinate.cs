@@ -21,11 +21,14 @@ public class Coordinate
         Status = statusNew;
     }
     
-    private static readonly string Letters = "ABCDEFGHIJK"; //  For navigation purposes.
-
     public string ToText()
     {
-        char colLetter = Letters[XValue];
-        return "|__|";
+        return Status switch
+        {
+            "Hit" => "| X|",
+            "Miss" => "| O|",
+            "Ship" => "| S|",
+            _ => "|__|"
+        };
     }
 }

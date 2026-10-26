@@ -4,7 +4,7 @@ public abstract class Person
 {
     public string Name { get; }
     public Board Board { get; }
-    private List<Ship> _ships = new();
+    public List<Ship> _ships = new(); //    Change to private later.
     public Score Score { get; }
     
     protected Person(string name)
@@ -37,9 +37,11 @@ public abstract class Person
                 ship.TakeHit(target, attacker);   
                 Score.LowerCount(this);
             }
+            else
+            {
+                // Complicated
+                targetPerson.Board.CoordinateLayout.First(c => c == target).ChangeStatus("Miss");
+            }
         }
-
-        // Complicated
-        targetPerson.Board.CoordinateLayout.First(c => c == target).ChangeStatus("Hit");
     }
 }

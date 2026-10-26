@@ -4,7 +4,7 @@ public abstract class Ship
 {
     public Person Owner { get; }
     private int Lenght { get; }
-    private List<Coordinate> Location { get; }
+    public List<Coordinate> Location { get; }   //  Change to private later.
     public bool Sunken { get; private set; }
     
     protected Ship(Person owner, int lenght, List<Coordinate> location)
