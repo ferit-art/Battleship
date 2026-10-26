@@ -3,8 +3,8 @@ namespace Battleship;
 public class Coordinate
 {
     public Board Board { get; }
-    private int XValue { get; }
-    private int YValue { get; }
+    public int XValue { get; }
+    public int YValue { get; }
     public string Status { get; private set; }
 
     public Coordinate(int xValue, int yValue, Board board)
@@ -20,9 +20,12 @@ public class Coordinate
     {
         Status = statusNew;
     }
+    
+    private static readonly string Letters = "ABCDEFGHIJK"; //  For navigation purposes.
 
     public string ToText()
     {
-        return $"({XValue},{YValue})";
+        char colLetter = Letters[XValue];
+        return "|__|";
     }
 }

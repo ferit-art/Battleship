@@ -6,11 +6,14 @@ public class Game
     public static bool s_gameActive { get; set;}
     public static Bot s_bot { get; set;}
     public static Player s_player { get; set;}
+    public static List<Person> s_players { get; set; }
 
     public Game()
     {
         InitializeGame();
+        /*
         GameManager.WelcomeMessage();
+        */
         GameLoop();
     }
 
@@ -19,6 +22,7 @@ public class Game
         s_gameActive = true;
         s_bot = new Bot();
         s_player = new Player();
+        s_players = new();
     }
 
     public void GameLoop()
@@ -33,14 +37,14 @@ public class Game
                 GameManager.BotTurn();
             }
 
-            if (GameManager.AskToPlayAgain())
+            /*if (GameManager.AskToPlayAgain())
             {
                 GameManager.PlayAgain();
             }
             else
             {
-                GameManager.Exit();
-            }
+                /*GameManager.Exit();#1#
+            }*/
         } while (s_gameActive);
     }
 }
