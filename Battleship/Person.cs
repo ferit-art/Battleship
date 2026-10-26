@@ -5,10 +5,12 @@ public abstract class Person
     public string Name { get; }
     public Board Board { get; }
     private List<Ship> _ships = new();
+    public Score Score { get; }
     
     protected Person(string name)
     {
         Name = name;
+        Score = new Score(Name);
         Board = new Board(Name);
     }
 
@@ -30,9 +32,10 @@ public abstract class Person
         
         foreach (var ship in targetPerson._ships)
         {
-            if (ship.ShipHit(target))
+            if (ship.ShipHit(target)) //    If the target coordinate matches any of the ship coordinates.
             {
                 ship.TakeHit(target, attacker);   
+                Score.LowerCount(this);
             }
         }
 
