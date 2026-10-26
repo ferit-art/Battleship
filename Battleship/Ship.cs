@@ -18,6 +18,7 @@ public abstract class Ship
     public void Sink(Person attacker)
     {
         Sunken = true;
+        Owner.Score.Lower
     }
 
     public bool ShipHit(Coordinate target)
