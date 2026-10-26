@@ -1,0 +1,14 @@
+# Build outputs
+[Bb]in/
+[Oo]bj/
+
+# IDE and Tooling
+.idea/
+.ai/
+*.sln.iml
+*.user
+*.suo
+
+# Editors
+.vs/
+.vscode/
