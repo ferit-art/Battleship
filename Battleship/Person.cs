@@ -18,7 +18,7 @@ public abstract class Person
     {
         if (ship.Owner == this)
         {
-            _ships.Add(ship);   
+            _ships.Add(ship);
         }
         else
         {

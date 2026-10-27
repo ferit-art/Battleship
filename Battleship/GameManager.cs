@@ -2,21 +2,28 @@ namespace Battleship;
 
 public class GameManager
 {
+    public void WelcomeMessage()
+    {
+        int listWidth = 25;
+        int leftMargin = Math.Max(0, (Console.WindowWidth - listWidth) / 2);
+        string indent = new string(' ', leftMargin);
+        
+        Console.Clear();
+        Console.WriteLine($"{indent}Welcome to Battleship, rules are simple;");
+        Console.WriteLine($"{indent}1.  Place your ships.");
+        Console.WriteLine($"{indent}2.  Try to guess and sink opponent's ships.");
+        Console.WriteLine("\n" + $"{indent}First come, first served. A good luck is needed.");
+        Console.WriteLine("Press a key to continue:");
+    }
     public void StartGame()
     {
         Console.Clear();
         Game.s_player.Board.PrintVisual();
 
         PrintShipsToPlace();
-        PlaceShips();   //  TODO: Test this piece of shit... Input A2 gave Invalid Input
-
-        foreach (Ship ship in Game.s_player._ships)
-        {
-            foreach (var c in ship.Location)
-            {
-                Console.WriteLine($"{c.XValue}, {c.YValue}");
-            }
-        }
+        PlaceShips();   //  Numbers first (like 1A)
+        Game.s_player.Board.PrintVisual();
+        Thread.Sleep(3000);
     }
 
     public void PrintShipsToPlace()
@@ -75,33 +82,74 @@ public class GameManager
     private List<Coordinate> AskShipCoordinates(int length)
     {
         string letters = "ABCDEFGHIJ";
-
-        Console.Clear();
-        Game.s_player.Board.PrintVisual();
-        Console.WriteLine();
-
         List<Coordinate> location = new();
-        for (int i = length; i > 0; i--)
+        Coordinate lastC = null;
+
+        for (int i = 0; i < length; i++)
         {
             //  Question loop
             string answer;
             do
             {
-                Console.WriteLine($"Choose {i} more coordinate(s):");
+                Console.Clear();
+                Game.s_player.Board.PrintVisual();
+                Console.WriteLine();
+                Console.WriteLine($"Choose the {i+1}. coordinate:");
                 answer = Console.ReadLine();
 
                 try
                 {
-                    string xVal = answer.Substring(0,1);
-                    char yVal = answer[1];
-                    Coordinate c = new Coordinate(int.Parse(xVal), letters.IndexOf(yVal), Game.s_player.Board);
-                    location.Add(c);
+                    string xVal;
+                    char yVal;
+                    int yValInt;
+                    
+                    if (answer.Length == 3) //  Incase of X = 10
+                    {
+                        xVal = answer.Substring(0,2);
+                        yVal = answer[2];
+                        yValInt = letters.IndexOf(yVal);    
+                    }
+                    else
+                    {
+                        xVal = answer.Substring(0,1);
+                        yVal = answer[1];
+                        yValInt = letters.IndexOf(yVal);
+                    }
+                    int targetX = int.Parse(xVal);
+
+                    if (yValInt != -1 && targetX > 0)
+                    {
+                        var c = Game.s_player.Board.GetCoordinate(targetX, yVal);
+                        if (lastC == null || Coordinate.CIsNextToAnotherC(lastC, c))
+                        {
+                            c.ChangeStatus("Ship");
+                            location.Add(c);
+                            lastC = c;
+                        }
+                        else   //   Incase the coordinates aren't next to each other
+                        {
+                            throw new FormatException($"Choose a coordinate next to the first, like " +
+                                                      $"{lastC.XValue + 1}{letters[lastC.YValue + 1]}");
+                        }
+                    }
+                    else   //  Incase the letter or x number doesn't match
+                    {
+                        throw new FormatException();
+                    }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("Invalid input.");
-                    Thread.Sleep(2000);
+                    if (e.Message != null)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine(e.Message);
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Invalid input. A correct example would be '1A'");
+                    }
+                    Thread.Sleep(2500);
                     answer = null;
                 }
             } while (answer == null);

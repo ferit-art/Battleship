@@ -31,4 +31,26 @@ public class Coordinate
             _ => "|__|"
         };
     }
+    
+    public static bool CIsNextToAnotherC(Coordinate c1, Coordinate c2)
+    {
+        bool cIsUpOrDown = false;
+        if (c1.YValue - 1 == c2.YValue || c1.YValue + 1 == c2.YValue)
+        {
+            cIsUpOrDown = true;
+        }
+
+        bool cIsRightOrLeft = false;
+        if (c1.XValue - 1 == c2.XValue || c1.XValue + 1 == c2.XValue)
+        {
+            cIsRightOrLeft = true;
+        }
+        
+        if (cIsRightOrLeft || cIsUpOrDown)
+        {
+            return true;   
+        }
+
+        return false;
+    }
 }
