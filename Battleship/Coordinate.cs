@@ -37,13 +37,19 @@ public class Coordinate
         bool cIsUpOrDown = false;
         if (c1.YValue - 1 == c2.YValue || c1.YValue + 1 == c2.YValue)
         {
-            cIsUpOrDown = true;
+            if (c1.XValue == c2.XValue)
+            {
+                cIsUpOrDown = true;   
+            }
         }
 
         bool cIsRightOrLeft = false;
         if (c1.XValue - 1 == c2.XValue || c1.XValue + 1 == c2.XValue)
         {
-            cIsRightOrLeft = true;
+            if (c1.YValue == c2.YValue)
+            {
+                cIsRightOrLeft = true;   
+            }
         }
         
         if (cIsRightOrLeft || cIsUpOrDown)

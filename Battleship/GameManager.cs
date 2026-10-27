@@ -84,7 +84,8 @@ public class GameManager
         string letters = "ABCDEFGHIJ";
         List<Coordinate> location = new();
         Coordinate lastC = null;
-
+        bool shipStraightLine = false;
+        
         for (int i = 0; i < length; i++)
         {
             //  Question loop
@@ -122,14 +123,17 @@ public class GameManager
                         var c = Game.s_player.Board.GetCoordinate(targetX, yVal);
                         if (lastC == null || Coordinate.CIsNextToAnotherC(lastC, c))
                         {
+                            if (shipStraightLine && C)
+                            {
+                                
+                            }
                             c.ChangeStatus("Ship");
                             location.Add(c);
                             lastC = c;
                         }
                         else   //   Incase the coordinates aren't next to each other
                         {
-                            throw new FormatException($"Choose a coordinate next to the first, like " +
-                                                      $"{lastC.XValue + 1}{letters[lastC.YValue + 1]}");
+                            throw new FormatException($"Choose a coordinate next to the first one");
                         }
                     }
                     else   //  Incase the letter or x number doesn't match
