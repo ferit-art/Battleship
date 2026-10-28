@@ -2,15 +2,15 @@ namespace Battleship;
 
 public abstract class Ship
 {
+    public string Name { get; }
     public Person Owner { get; }
-    private int Lenght { get; }
     public List<Coordinate> Location { get; }   //  Change to private later.
     public bool Sunken { get; private set; }
     
-    protected Ship(Person owner, int lenght, List<Coordinate> location)
+    protected Ship(string name, Person owner, List<Coordinate> location)
     {
+        Name = name;
         Owner = owner;
-        Lenght = lenght;
         Location = location;
         Sunken = false;
     }

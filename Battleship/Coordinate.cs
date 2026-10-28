@@ -14,11 +14,15 @@ public class Coordinate
         Board = board;
         Status = "";
     }
-
-    //  Maybe move the if comparisons to the Board.cs and make it even simpler in the Change methods.
+    
     public void ChangeStatus(string statusNew)
     {
         Status = statusNew;
+    }
+
+    public string GetStatus()
+    {
+        return Status;
     }
     
     public string ToText()

@@ -78,7 +78,12 @@ public class Board
     {
         string letters = "ABCDEFGHIJ";
         int y = letters.IndexOf(char.ToUpper(letter)) + 1;
-
-        return CoordinateLayout.First(c => c.XValue == x && c.YValue == y);
+        
+        if (x < 1 || x > 10 || y == -1)    //  Reject out-of-bounds X or unknown letters
+        {
+            return null;
+        }
+        
+        return CoordinateLayout.FirstOrDefault(c => c.XValue == x && c.YValue == y);
     }
 }

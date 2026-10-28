@@ -2,13 +2,15 @@ namespace Battleship;
 
 public class Bot() : Person("Bot")
 {
-    private Random _random = new();
+    private readonly Random _random = new();
     
     public Coordinate Guess()
     {
+        string letters = "ABCDEFGHIJ";
         int x = _random.Next(0, 10);
-        int y = _random.Next(0, 10);
-        //  Might not work later
-        return new Coordinate(x, y, Game.s_players.OfType<Player>().First().Board);
+        int yInt = _random.Next(0, 10);
+        char y = letters[yInt];
+
+        return Game.s_players.OfType<Player>().FirstOrDefault().Board.GetCoordinate(x, y);
     }
 }

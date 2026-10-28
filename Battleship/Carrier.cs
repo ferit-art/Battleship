@@ -1,3 +1,3 @@
 namespace Battleship;
 
-public class Carrier(Person owner, List<Coordinate> location) : Ship(owner, 5, location);
+public class Carrier(Person owner, List<Coordinate> location) : Ship("Carrier", owner, location);

@@ -29,7 +29,11 @@ public class Game
     {
         do
         {
+            /*
             GameManager.StartGame();
+            */
+            
+            //  TODO:   PlayerTurn() and BotTurn() should be in a loop of its' own.
             GameManager.PlayerTurn();
             
             if (s_gameActive)
