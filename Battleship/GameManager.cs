@@ -84,10 +84,19 @@ public class GameManager
         string letters = "ABCDEFGHIJ";
         List<Coordinate> location = new();
         Coordinate lastC = null;
-        bool shipStraightLine = false;
+        bool shipIsToBeStraight = false;
         
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < length; i++)    //  Iterates through the amount of C
         {
+            if (i > 1)
+            {
+                shipIsToBeStraight = true;
+            }
+            else
+            {
+                shipIsToBeStraight = false;
+            }
+            
             //  Question loop
             string answer;
             do
@@ -123,17 +132,30 @@ public class GameManager
                         var c = Game.s_player.Board.GetCoordinate(targetX, yVal);
                         if (lastC == null || Coordinate.CIsNextToAnotherC(lastC, c))
                         {
-                            if (shipStraightLine && C)
+                            if (shipIsToBeStraight)
                             {
-                                
+                                if (LineIsStraight(location, c))
+                                {
+                                    c.ChangeStatus("Ship");
+                                    location.Add(c);
+                                    lastC = c;   
+                                }
+                                else   //   In case the coordinates don't make a straight line
+                                {
+                                    throw new FormatException("The coordinates must line up to make " +
+                                                              "a straight ship");
+                                }
                             }
-                            c.ChangeStatus("Ship");
-                            location.Add(c);
-                            lastC = c;
+                            else
+                            {
+                                c.ChangeStatus("Ship");
+                                location.Add(c);
+                                lastC = c;
+                            }
                         }
                         else   //   Incase the coordinates aren't next to each other
                         {
-                            throw new FormatException($"Choose a coordinate next to the first one");
+                            throw new FormatException("Choose a coordinate next to the first one");
                         }
                     }
                     else   //  Incase the letter or x number doesn't match
@@ -159,6 +181,20 @@ public class GameManager
             } while (answer == null);
         }
         return location;
+    }
+
+    private bool LineIsStraight(List<Coordinate> location, Coordinate c)
+    {
+        if (location[0].YValue == location[1].YValue)
+        {
+            return c.YValue == location[0].YValue;
+        }
+        if (location[0].XValue == location[1].XValue)
+        {
+            return c.XValue == location[0].XValue;
+        }
+
+        return false;
     }
 
     public void PlayerTurn()

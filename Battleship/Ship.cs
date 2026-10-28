@@ -1,7 +1,5 @@
 namespace Battleship;
 
-//  TODO:   Add Axis; that will determine in what type of a straight line the ship is gonna be, as
-//  TODO:   the X or Y axis?
 public abstract class Ship
 {
     public Person Owner { get; }

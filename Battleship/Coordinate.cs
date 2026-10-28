@@ -25,9 +25,9 @@ public class Coordinate
     {
         return Status switch
         {
-            "Hit" => "| X|",
-            "Miss" => "| O|",
-            "Ship" => "| S|",
+            "Hit" => "|_X|",
+            "Miss" => "|_O|",
+            "Ship" => "|_S|",
             _ => "|__|"
         };
     }
