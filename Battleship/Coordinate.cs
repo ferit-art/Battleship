@@ -27,6 +27,16 @@ public class Coordinate
     
     public string ToText()
     {
+        if (Board.CoordinateLayout == Game.s_bot.Board.CoordinateLayout)
+        {
+            return Status switch
+            {
+                "Hit" => "|_X|",
+                "Miss" => "|_O|",
+                _ => "|__|"
+            };        
+        }
+        
         return Status switch
         {
             "Hit" => "|_X|",
@@ -38,6 +48,8 @@ public class Coordinate
     
     public static bool CIsNextToAnotherC(Coordinate c1, Coordinate c2)
     {
+        if (c1 == null || c2 == null) return false; //  Skydd för null
+
         bool cIsUpOrDown = false;
         if (c1.YValue - 1 == c2.YValue || c1.YValue + 1 == c2.YValue)
         {

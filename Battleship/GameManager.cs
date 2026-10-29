@@ -28,6 +28,8 @@ public class GameManager
         // {
             PrintShipsToPlace();
             PlaceShips(); //  Numbers first (like 1A)
+            
+            Game.s_bot.PlaceShips();
         // } while (!AllShipsArePlaced);
         
         Console.Clear();
@@ -116,7 +118,8 @@ public class GameManager
 
     private List<Coordinate> AskShipCoordinates(int length) //  TODO:   CHECK IF THE CHOSEN LENGHT FITS
                                                             //  TODO:   THE REST OF THE C's IN THE DIRE
-                                                            //  TODO:   CTION OF THE 1. AND 2. C.
+                                                            //  TODO:   CTION OF THE 1. AND 2. C. OTHERWISE
+                                                            //  TODO:   THE USER IS SOFTLOCKED.
     {
         string letters = "ABCDEFGHIJ";
         List<Coordinate> location = new();
@@ -164,7 +167,7 @@ public class GameManager
                     var c = Game.s_player.Board.GetCoordinate(int.Parse(xVal), yVal);
                     if (lastC == null || Coordinate.CIsNextToAnotherC(lastC, c))
                     {
-                        if (c.ToText() == "|__|")   //  If the c is occupied of a status
+                        if (c.ToText() == "|__|")   //  If the c is not occupied of a status
                         {
                             if (shipIsToBeStraight)
                             {
@@ -219,7 +222,7 @@ public class GameManager
         return location;
     }
 
-    private static bool LineIsStraight(List<Coordinate> location, Coordinate c)
+    public static bool LineIsStraight(List<Coordinate> location, Coordinate c)
     {
         if (location[0].YValue == location[1].YValue)
         {
@@ -288,7 +291,7 @@ public class GameManager
                 
                 Console.Clear();
                 Game.s_bot.Board.PrintVisual();
-                Console.WriteLine($"It's a **{c.Status}**");
+                Console.WriteLine($"It's a [{c.Status}]");
             } 
             catch(Exception e)
             {
