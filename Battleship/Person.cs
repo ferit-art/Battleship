@@ -28,20 +28,15 @@ public abstract class Person
 
     public virtual void Hit(Coordinate target, Person targetPerson)
     {
-        Person attacker = this;
-        
-        foreach (var ship in targetPerson._ships)
+        if (targetPerson._ships.Any(s => s.ShipIsHit(target)))  //  If it is a HIT
         {
-            if (ship.ShipHit(target)) //    If the target coordinate matches any of the ship coordinates.
-            {
-                ship.TakeHit(target, attacker);   
-                Score.LowerCount(this);
-            }
-            else
-            {
-                // Complicated
-                targetPerson.Board.CoordinateLayout.First(c => c == target).ChangeStatus("Miss");
-            }
+            Ship ship = targetPerson._ships.First(s => s.Location.Any(c => c.Equals(target)));
+            ship.TakeHit(target, this);   
+            Score.LowerCount(this);
+        }
+        else
+        {
+            targetPerson.Board.CoordinateLayout.First(c => c == target).ChangeStatus("Miss");
         }
     }
 }

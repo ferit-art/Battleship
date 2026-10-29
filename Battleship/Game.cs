@@ -4,6 +4,7 @@ public class Game
 {
     public GameManager GameManager = new();
     public static bool s_gameActive { get; set;}
+    public static bool s_turnActive { get; set;}
     public static Bot s_bot { get; set;}
     public static Player s_player { get; set;}
     public static List<Person> s_players { get; set; }
@@ -29,26 +30,27 @@ public class Game
     {
         do
         {
-            /*
             GameManager.StartGame();
-            */
             
-            //  TODO:   PlayerTurn() and BotTurn() should be in a loop of its' own.
-            GameManager.PlayerTurn();
-            
-            if (s_gameActive)
+            do
             {
-                GameManager.BotTurn();
-            }
+                GameManager.PlayerTurn();
+            
+                // if (s_gameActive)
+                // {
+                //     GameManager.BotTurn();
+                // }    
+            } while (s_turnActive);
+            
 
-            /*if (GameManager.AskToPlayAgain())
-            {
-                GameManager.PlayAgain();
-            }
-            else
-            {
-                /*GameManager.Exit();#1#
-            }*/
+            // if (GameManager.AskToPlayAgain())
+            // {
+            //     GameManager.PlayAgain();
+            // }
+            // else
+            // {
+            //     GameManager.Exit();
+            // }
         } while (s_gameActive);
     }
 }

@@ -2,6 +2,8 @@ namespace Battleship;
 
 public class GameManager
 {
+    public static bool AllShipsArePlaced = false;
+    
     public static void WelcomeMessage()
     {
         int listWidth = 25;
@@ -22,10 +24,15 @@ public class GameManager
         Console.Clear();
         Game.s_player.Board.PrintVisual();
 
-        PrintShipsToPlace();
-        PlaceShips(); //  Numbers first (like 1A)
+        // do
+        // {
+            PrintShipsToPlace();
+            PlaceShips(); //  Numbers first (like 1A)
+        // } while (!AllShipsArePlaced);
+        
+        Console.Clear();
         Game.s_player.Board.PrintVisual();
-        Thread.Sleep(3000);
+        Thread.Sleep(2500);
     }
 
     public static void PrintShipsToPlace()
@@ -51,6 +58,7 @@ public class GameManager
 
             if (Game.s_player._ships.Count == 5)
             {
+                AllShipsArePlaced = true;
                 Console.WriteLine($"{indent}None left");
                 Console.Write("\nPress a key to continue:");
                 //  Temporarily
@@ -228,7 +236,14 @@ public class GameManager
 
     public void PlayerTurn()
     {
+        int width = 25;
+        int margin = Math.Max(0, (Console.WindowWidth - width) / 2);
+        string indent = new string(' ', margin);
+        
+        Console.Clear();
+        Console.WriteLine($"{indent}The computer's board:");
         Game.s_bot.Board.PrintVisual();
+        Console.WriteLine($"{indent}The player's board:");
         Game.s_player.Board.PrintVisual();
 
         AskTargetCoordinate();
@@ -263,23 +278,17 @@ public class GameManager
                 }
 
                 var c = Game.s_bot.Board.GetCoordinate(int.Parse(xVal), yVal);
-
-                switch (c.ToText())
+                if (c.ToText() != "|__|" && c.ToText() != "|_S|")
                 {
-                    case "|__|":
-                        c.ChangeStatus("Miss"); 
-                        break;
-                    case "|_S|":
-                        c.ChangeStatus("Hit");
-                        break;
-                    default:
-                        message = "Choose an unoccupied target";
-                        throw new FormatException(message);
+                    message = "Choose an unoccupied target";
+                    throw new FormatException(message);
                 }
+                
+                Game.s_player.Hit(c, Game.s_bot);
                 
                 Console.Clear();
                 Game.s_bot.Board.PrintVisual();
-                Console.WriteLine($"It's a {c.Status}");
+                Console.WriteLine($"It's a **{c.Status}**");
             } 
             catch(Exception e)
             {
@@ -302,4 +311,19 @@ public class GameManager
         {
             Thread.Sleep(1000);
         }
+
+    public void Exit()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void PlayAgain()
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool AskToPlayAgain()
+    {
+        throw new NotImplementedException();
+    }
 }

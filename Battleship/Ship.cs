@@ -15,13 +15,13 @@ public abstract class Ship
         Sunken = false;
     }
 
-    public void Sink(Person attacker)
+    public void Sink()
     {
         Sunken = true;
         Owner.Score.LowerCount(Owner);
     }
 
-    public bool ShipHit(Coordinate target)
+    public bool ShipIsHit(Coordinate target)
     {
         if (Location.Any(c => c == target))
         {
@@ -49,7 +49,7 @@ public abstract class Ship
 
             if (sunken)
             {
-                Sink(attacker);
+                Sink();
             }
         }
         else
