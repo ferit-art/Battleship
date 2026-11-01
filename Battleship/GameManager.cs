@@ -3,7 +3,7 @@ namespace Battleship;
 public class GameManager
 {
     public static bool AllShipsArePlaced = false;
-    
+
     public static void WelcomeMessage()
     {
         int listWidth = 25;
@@ -14,24 +14,27 @@ public class GameManager
         Console.WriteLine($"{indent}Welcome to Battleship, rules are simple;");
         Console.WriteLine($"{indent}1.  Place your ships.");
         Console.WriteLine($"{indent}2.  Try to guess and sink opponent's ships.");
-        Console.WriteLine("\n" + $"{indent}First come, first served. A good luck is needed.");
-        Console.WriteLine("Press a key to continue:");
+        Console.WriteLine("\n" + $"{indent}First come, first served. A good luck is indeed needed.");
+        Thread.Sleep(5000);
         //  TODO: PRESS ANY KEY.
     }
 
     public void StartGame()
     {
         Console.Clear();
+        Game.s_bot.PlaceShips();
         Game.s_player.Board.PrintVisual();
 
-        // do
-        // {
+        do
+        {
             PrintShipsToPlace();
+            if (AllShipsArePlaced)
+            {
+                break;
+            }
             PlaceShips(); //  Numbers first (like 1A)
-            
-            Game.s_bot.PlaceShips();
-        // } while (!AllShipsArePlaced);
-        
+        } while (!AllShipsArePlaced);
+
         Console.Clear();
         Game.s_player.Board.PrintVisual();
         Thread.Sleep(2500);
@@ -54,7 +57,7 @@ public class GameManager
                 if (!Game.s_player._ships.Any(s => s.Name == shipToPlace))
                 {
                     Console.WriteLine($"{indent}[{shipsToPlace.IndexOf(shipToPlace) + 1}] " +
-                                      $"{shipToPlace}");   
+                                      $"{shipToPlace}");
                 }
             }
 
@@ -62,13 +65,13 @@ public class GameManager
             {
                 AllShipsArePlaced = true;
                 Console.WriteLine($"{indent}None left");
-                Console.Write("\nPress a key to continue:");
+                // Console.Write("\nPress a key to continue:");
                 //  Temporarily
                 Thread.Sleep(2000);
                 //  TODO: PRESS ANY KEY IMPLEMENTATION.
             }
         }
-        else   //   For the first time
+        else //   For the first time
         {
             Console.WriteLine($"{indent}[1] Carrier");
             Console.WriteLine($"{indent}[2] Battleship");
@@ -80,7 +83,7 @@ public class GameManager
 
     public void PlaceShips()
     {
-        string answer;
+        string? answer;
 
         do
         {
@@ -90,24 +93,40 @@ public class GameManager
             switch (answer)
             {
                 case "1":
-                    shipLocation = AskShipCoordinates(5);
-                    Game.s_player.AddShip(new Carrier(Game.s_player, shipLocation));
+                    if (ChoiceIsNotPlaced(Game.s_player, "Carrier"))
+                    {
+                        shipLocation = AskShipCoordinates(5);
+                        Game.s_player.AddShip(new Carrier(Game.s_player, shipLocation));
+                    }
                     break;
                 case "2":
-                    shipLocation = AskShipCoordinates(4);
-                    Game.s_player.AddShip(new Battleship(Game.s_player, shipLocation));
+                    if (ChoiceIsNotPlaced(Game.s_player, "Battleship"))
+                    {
+                        shipLocation = AskShipCoordinates(4);
+                        Game.s_player.AddShip(new Battleship(Game.s_player, shipLocation));    
+                    }
                     break;
                 case "3":
-                    shipLocation = AskShipCoordinates(3);
-                    Game.s_player.AddShip(new Destroyer(Game.s_player, shipLocation));
+                    if (ChoiceIsNotPlaced(Game.s_player, "Destroyer"))
+                    {
+                        shipLocation = AskShipCoordinates(3);
+                        Game.s_player.AddShip(new Destroyer(Game.s_player, shipLocation));   
+                    }
                     break;
                 case "4":
-                    shipLocation = AskShipCoordinates(3);
-                    Game.s_player.AddShip(new Submarine(Game.s_player, shipLocation));
+                    if (ChoiceIsNotPlaced(Game.s_player, "Submarine"))
+                    {
+                        shipLocation = AskShipCoordinates(3);
+                        Game.s_player.AddShip(new Submarine(Game.s_player, shipLocation));   
+                    }
                     break;
                 case "5":
-                    shipLocation = AskShipCoordinates(2);
-                    Game.s_player.AddShip(new PatrolBoat(Game.s_player, shipLocation));
+                    if (ChoiceIsNotPlaced(Game.s_player, "Patrol Boat"))
+                    {
+                     
+                        shipLocation = AskShipCoordinates(2);
+                        Game.s_player.AddShip(new PatrolBoat(Game.s_player, shipLocation));   
+                    }
                     break;
                 default:
                     Console.WriteLine("Invalid input.");
@@ -116,10 +135,20 @@ public class GameManager
         } while (answer == null);
     }
 
+    public static bool ChoiceIsNotPlaced(Person person, string ship)
+    {
+        if (person._ships.Any(s => s.Name == ship))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     private List<Coordinate> AskShipCoordinates(int length) //  TODO:   CHECK IF THE CHOSEN LENGHT FITS
-                                                            //  TODO:   THE REST OF THE C's IN THE DIRE
-                                                            //  TODO:   CTION OF THE 1. AND 2. C. OTHERWISE
-                                                            //  TODO:   THE USER IS SOFTLOCKED.
+        //  TODO:   THE REST OF THE C's IN THE DIRE
+        //  TODO:   CTION OF THE 1. AND 2. C. OTHERWISE
+        //  TODO:   THE USER IS SOFTLOCKED.
     {
         string letters = "ABCDEFGHIJ";
         List<Coordinate> location = new();
@@ -163,11 +192,11 @@ public class GameManager
                         xVal = answer.Substring(0, 1);
                         yVal = answer[1];
                     }
-                    
+
                     var c = Game.s_player.Board.GetCoordinate(int.Parse(xVal), yVal);
                     if (lastC == null || Coordinate.CIsNextToAnotherC(lastC, c))
                     {
-                        if (c.ToText() == "|__|")   //  If the c is not occupied of a status
+                        if (c.ToText() == "|__|") //  If the c is not occupied of a status
                         {
                             if (shipIsToBeStraight)
                             {
@@ -239,37 +268,42 @@ public class GameManager
 
     public void PlayerTurn()
     {
-        int width = 25;
-        int margin = Math.Max(0, (Console.WindowWidth - width) / 2);
-        string indent = new string(' ', margin);
-        
-        Console.Clear();
-        Console.WriteLine($"{indent}The computer's board:");
-        Game.s_bot.Board.PrintVisual();
-        Console.WriteLine($"{indent}The player's board:");
-        Game.s_player.Board.PrintVisual();
+        do
+        {
+            int width = 25;
+            int margin = Math.Max(0, (Console.WindowWidth - width) / 2);
+            string indent = new string(' ', margin);
 
-        AskTargetCoordinate();
-        Thread.Sleep(1000);
+            Console.Clear();
+            Console.WriteLine($"{indent}The computer's board:");
+            Game.s_bot.Board.PrintVisual();
+            Console.WriteLine();
+            Console.WriteLine($"{indent}The player's board:");
+            Game.s_player.Board.PrintVisual();
+
+            AskTargetCoordinate();
+            Thread.Sleep(1000);
+            WinCheck(Game.s_player, Game.s_bot);
+        } while (Game.s_player.HasAHit);
     }
 
     private void AskTargetCoordinate()
     {
         Console.WriteLine();
 
-        string answer;
+        string? answer;
         do
         {
             Console.Write("Choose a coordinate to strike:");
             answer = Console.ReadLine();
-            string message = null;
+            string? message = null;
 
             try
             {
                 string xVal;
                 char yVal;
 
-                if (answer.Length == 3) //  Incase of X = 10
+                if (answer!.Length == 3) //  Incase of X = 10
                 {
                     xVal = answer.Substring(0, 2);
                     yVal = answer[2];
@@ -286,17 +320,17 @@ public class GameManager
                     message = "Choose an unoccupied target";
                     throw new FormatException(message);
                 }
-                
+
                 Game.s_player.Hit(c, Game.s_bot);
-                
+
                 Console.Clear();
                 Game.s_bot.Board.PrintVisual();
                 Console.WriteLine($"It's a [{c.Status}]");
-            } 
-            catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine();
-                
+
                 if (e.Message == message)
                 {
                     Console.WriteLine(e.Message);
@@ -305,28 +339,103 @@ public class GameManager
                 {
                     Console.WriteLine("Invalid input.");
                 }
+
                 Thread.Sleep(2000);
             }
-        } while (answer == null) ;
+        } while (answer == null);
     }
 
     public void BotTurn()
+    {
+        do
+        {
+            Coordinate? target;
+            do
+            {
+                target = Game.s_bot.Guess(Game.s_player.Board);
+            } while (target == null);
+
+            Game.s_bot.Hit(target, Game.s_player);
+            WinCheck(Game.s_bot, Game.s_player);
+
+        } while (Game.s_bot.HasAHit && Game.s_gameActive);
+
+        Thread.Sleep(1000);
+    }
+
+    public void WinCheck(Person attacker, Person target)
+    {
+        Person? winner;
+        if (target._ships.All(s => s.Sunken))
+        {
+            attacker.HasWon = true;
+            winner = attacker;
+        }
+        else
+        {
+            winner = null;
+        }
+        
+        if (winner != null)
         {
             Thread.Sleep(1000);
+            Console.WriteLine();
+            Console.WriteLine($"The {winner.Name} has won this round.");
+            Game.s_gameActive = false;
+            attacker.HasAHit = false;
         }
+    }
 
     public void Exit()
     {
-        throw new NotImplementedException();
+        Console.Clear();
+        Console.WriteLine("Exiting...");
+        Thread.Sleep(2000);
+        Environment.Exit(0);
     }
 
     public void PlayAgain()
     {
-        throw new NotImplementedException();
+        Game.s_gameActive = true;
+        AllShipsArePlaced = false;
+        List<Person> players = [Game.s_bot, Game.s_player];
+
+        foreach (var person in players)
+        {
+            foreach (var c in person.Board.CoordinateLayout)
+            {
+                c.ChangeStatus("");
+            }
+            person.HasWon = false;
+            person.Score.ShipCount = 5;
+            person._ships.Clear();
+        }
     }
 
     public bool AskToPlayAgain()
     {
-        throw new NotImplementedException();
+        string? answer;
+
+        do
+        {
+            Console.Clear();
+            Console.Write("One more round? [Y] or [N]: "); 
+            answer = Console.ReadLine();
+            
+            switch (answer?.Trim().ToUpper())
+            {
+                case "Y":
+                    return true;
+                case "N":
+                    return false;
+                default:
+                    Console.WriteLine("Invalid input.");
+                    answer = null;
+                    Thread.Sleep(2000);
+                    break;
+            }
+        } while (answer == null);
+
+        throw new InvalidOperationException();
     }
 }

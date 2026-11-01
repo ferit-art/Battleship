@@ -5,13 +5,17 @@ public abstract class Person
     public string Name { get; }
     public Board Board { get; }
     public List<Ship> _ships = new(); //    Change to private later.
-    public Score Score { get; }
+    public Score Score { get; set; }
+    public bool HasWon { get; set; }
+    public bool HasAHit { get; set; }
     
     protected Person(string name)
     {
         Name = name;
         Score = new Score(Name);
         Board = new Board(Name);
+        HasWon = false;
+        HasAHit = false;
     }
 
     public void AddShip(Ship ship)
@@ -33,9 +37,11 @@ public abstract class Person
             Ship ship = targetPerson._ships.First(s => s.Location.Any(c => c.Equals(target)));
             ship.TakeHit(target, this);   
             Score.LowerCount(this);
+            HasAHit = true;
         }
         else
         {
+            HasAHit = false;
             targetPerson.Board.CoordinateLayout.First(c => c == target).ChangeStatus("Miss");
         }
     }

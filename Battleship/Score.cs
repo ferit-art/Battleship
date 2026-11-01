@@ -3,7 +3,7 @@ namespace Battleship;
 public class Score
 {
     public string Owner { get; }
-    public int ShipCount { get; private set; }
+    public int ShipCount { get; set; }
 
     public Score(string person)
     {

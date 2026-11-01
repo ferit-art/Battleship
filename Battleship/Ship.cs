@@ -36,18 +36,8 @@ public abstract class Ship
         {
             int targetIndex = Location.IndexOf(target);
             Location[targetIndex].ChangeStatus("Hit");
-            Location.Remove(target);
 
-            bool sunken = false;
-            foreach (var c in Location)
-            {
-                if (c.Status == "Hit")
-                {
-                    sunken = true;
-                }
-            }
-
-            if (sunken)
+            if (Location.All(c => c.Status == "Hit"))
             {
                 Sink();
             }
