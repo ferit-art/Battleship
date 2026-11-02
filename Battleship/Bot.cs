@@ -1,10 +1,13 @@
+using System.Diagnostics;
+
 namespace Battleship;
 
 public class Bot() : Person("Bot")
 {
     private readonly Random _random = new();
+    public static string? GuessAxis;
 
-    public Coordinate? Guess(Board board)
+    public Coordinate? Guess(Board board, int shipCount)
     {
         string letters = "ABCDEFGHIJ";
         int x = _random.Next(1, 11);
@@ -23,7 +26,7 @@ public class Bot() : Person("Bot")
             return null;
         }
 
-        var possibleX = SearchX(); //   Searches after a previous hit and returns the c's available
+        var possibleX = SearchX(shipCount); //   Searches after a previous hit and returns the c's available
         //   that are nearest to the hit.
         if (possibleX != null)
         {
@@ -39,7 +42,7 @@ public class Bot() : Person("Bot")
         return null;
     }
 
-    private Coordinate? SearchX()
+    private Coordinate? SearchX(int shipCount)
     {
         List<Coordinate> hits = Game.s_player.Board.CoordinateLayout.Where(c =>
             c.ToText() == "|_X|").ToList();
@@ -48,8 +51,34 @@ public class Bot() : Person("Bot")
         {
             foreach (var x in hits)
             {
-                var cNearX = Game.s_player.Board.CoordinateLayout.Where(c =>
-                    Coordinate.CIsNextToAnotherC(x, c) && c.ToText() != "|_X|" && c.ToText() != "|_O|").ToList();
+                SearchOrientation(x);   //    Checks if there are any hits
+                                        //    near the C and sets the guess
+                                        //    orientation
+
+                List<Coordinate> cNearX;
+                if (GuessAxis != null && shipCount == Game.s_player.Score.ShipCount)
+                {   //  Returns the available coords from the guess axis
+                    List<Coordinate> pool;
+                    if (GuessAxis == "y")
+                    {
+                        pool = Game.s_player.Board.CoordinateLayout.Where(c => c.XValue == x.XValue).ToList();
+                    }
+                    else
+                    {
+                        pool = Game.s_player.Board.CoordinateLayout.Where(c => c.YValue == x.YValue).ToList();
+                    }
+
+                    GuessAxis = null;
+                    
+                    cNearX = pool.Where(c => Coordinate.CIsNextToAnotherC(x, c) 
+                                             && c.ToText() != "|_X|" && c.ToText() != "|_O|").ToList();
+                }
+                else
+                {   //  If there aren't any previous hits near the last hit
+                    cNearX = Game.s_player.Board.CoordinateLayout.Where(c =>
+                        Coordinate.CIsNextToAnotherC(x, c) && c.ToText() != "|_X|"
+                                                           && c.ToText() != "|_O|").ToList();
+                }
 
                 if (cNearX.Count != 0)
                 {
@@ -57,8 +86,22 @@ public class Bot() : Person("Bot")
                 }
             }
         }
-
         return null;
+    }
+
+    private void SearchOrientation(Coordinate? x)
+    {
+        if (GuessAxis == null)
+        {
+            var xNearX = Game.s_player.Board.CoordinateLayout.FirstOrDefault(c =>
+                Coordinate.CIsNextToAnotherC(x, c) && c.ToText() == "|_X|");
+
+            if (xNearX != null)
+            {
+                Debug.Assert(x != null, nameof(x) + " != null");
+                GuessAxis = xNearX.XValue == x.XValue ? "y" : "x";
+            }
+        }
     }
 
     public void PlaceShips()

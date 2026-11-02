@@ -48,7 +48,7 @@ public class Coordinate
     
     public static bool CIsNextToAnotherC(Coordinate c1, Coordinate c2)
     {
-        if (c1 == null || c2 == null) return false; //  Skydd för null
+        if (c1 == null || c2 == null) return false; //  Protection for null
 
         bool cIsUpOrDown = false;
         if (c1.YValue - 1 == c2.YValue || c1.YValue + 1 == c2.YValue)

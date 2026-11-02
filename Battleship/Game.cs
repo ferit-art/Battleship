@@ -33,7 +33,7 @@ public class Game
             
                 if (s_gameActive)
                 {
-                    GameManager.BotTurn();
+                    GameManager.BotTurn(s_player.Score.ShipCount);
                 }  
             }
 
