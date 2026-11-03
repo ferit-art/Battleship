@@ -74,7 +74,7 @@ public class Board
         }
     }
 
-    public Coordinate GetCoordinate(int x, char letter)
+    public Coordinate? GetCoordinate(int x, char letter)
     {
         string letters = "ABCDEFGHIJ";
         int y = letters.IndexOf(char.ToUpper(letter)) + 1;

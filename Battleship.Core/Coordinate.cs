@@ -27,7 +27,7 @@ public class Coordinate
     
     public string ToText()
     {
-        if (Board.CoordinateLayout == Game.s_bot.Board.CoordinateLayout)
+        if (Board.Owner == "Bot")
         {
             return Status switch
             {

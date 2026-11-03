@@ -480,6 +480,7 @@ public class GameManager
             Thread.Sleep(1000);
             Console.WriteLine();
             Console.WriteLine($"The {winner.Name} has won this round.");
+            Thread.Sleep(2000);
             Game.s_gameActive = false;
             attacker.HasAHit = false;
         }

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Battleship.Maui.MainPage">
+
+    <Grid>
+        <!-- BACKGROUND LAYER -->   
+        <Image
+            Source="menu_bg.jpg"
+            Aspect="AspectFill"
+            SemanticProperties.Description="Background image for the start menu"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"/>
+        
+        <!-- UI CONTENT LAYER -->
+        <Grid
+            RowDefinitions="Auto, *, Auto"
+            Padding="24, 60, 24, 40">
+            
+            <!-- TITLE HEADER -->
+            <!-- Row 1 in the grid layout -->
+            <VerticalStackLayout 
+                Grid.Row="0"    
+                Spacing="6"
+                HorizontalOptions="Center">
+
+            <Label
+                Text="BATTLESHIP"
+                FontSize="42"
+                FontAttributes="Bold"
+                TextColor="#E0F7FA"
+                HorizontalOptions="Center"
+                CharacterSpacing="2"/>
+            
+            <Label
+                Text="TRADITIONAL FLEET COMMAND SIMULATION"
+                FontSize="13"
+                TextColor="#80DEEA"
+                HorizontalOptions="Center"
+                CharacterSpacing="2"/>
+            </VerticalStackLayout>
+            
+            <!-- NAVIGATION BUTTONS-->
+            <!-- Row 2 -->
+            <VerticalStackLayout
+                Grid.Row="1"
+                VerticalOptions="Center"
+                Spacing="16"
+                Padding="20,0">
+                
+                <!-- START BUTTON -->
+                <Button
+                    x:Name="StartBtn"
+                    ImageSource="button_img.jpg"
+                    Text="START GAME" 
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    TextColor="#FFFFFF"
+                    BackgroundColor="#CC004D40"
+                    BorderColor="#00E5FF"
+                    BorderWidth="1.5"
+                    CornerRadius="8"
+                    HeightRequest="56"
+                    CharacterSpacing="2"
+                    SemanticProperties.Hint="Starts the game, making the app to present the next scene"
+                    Clicked="OnStartGameClicked"/>
+            
+                <!-- RULES BUTTON -->
+                <Button
+                    x:Name="RulesBtn"
+                    Text="HOW TO PLAY" 
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    TextColor="#FFFFFF"
+                    BackgroundColor="#CC004D40"
+                    BorderColor="#00E5FF"
+                    BorderWidth="1.5"
+                    CornerRadius="8"
+                    HeightRequest="56"
+                    CharacterSpacing="2"
+                    SemanticProperties.Hint="Explains the controlls and rules of the game."
+                    Clicked="OnHowToPlayClicked"/>
+            
+                <!-- EXIT BUTTON -->
+                <Button
+                    x:Name="ExitBtn"
+                    Text="EXIT GAME" 
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    TextColor="#FFFFFF"
+                    BackgroundColor="#CC004D40"
+                    BorderColor="#00E5FF"
+                    BorderWidth="1.5"
+                    CornerRadius="8"
+                    HeightRequest="56"
+                    CharacterSpacing="2"
+                    SemanticProperties.Hint="Exits the game."
+                    Clicked="OnExitGameClicked"/>
+            </VerticalStackLayout>
+            
+            <!-- VERSION FOOTER -->
+            <!-- Row 3 -->
+            <Label
+                Grid.Row="2"
+                Text="v1.0 • CLASSIC 10x10"
+                FontSize="8"
+                TextColor="#FFFFFF"
+                HorizontalOptions="End"
+                CharacterSpacing="1"/>
+            </Grid>
+    </Grid>
+</ContentPage>

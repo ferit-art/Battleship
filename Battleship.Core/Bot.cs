@@ -6,15 +6,22 @@ public class Bot() : Person("Bot")
 {
     private readonly Random _random = new();
     public static string? GuessAxis;
+    private int EnemyShipCount = 5;
 
     public Coordinate? Guess(Board board, int shipCount)
     {
+        if (shipCount != EnemyShipCount)    //  Checks from bot memory
+        {
+            GuessAxis = null;
+            EnemyShipCount = shipCount;
+        }
+        
         string letters = "ABCDEFGHIJ";
         int x = _random.Next(1, 11);
         int yInt = _random.Next(0, 10);
         char y = letters[yInt];
 
-        Coordinate c;
+        Coordinate? c;
         if (board.CoordinateLayout == Board.CoordinateLayout)
         {
             c = Board.GetCoordinate(x, y);
@@ -26,14 +33,14 @@ public class Bot() : Person("Bot")
             return null;
         }
 
-        var possibleX = SearchX(shipCount); //   Searches after a previous hit and returns the c's available
-        //   that are nearest to the hit.
+        var possibleX = SearchX(board, shipCount); //   Searches after a previous hit and returns the c's available
+                                                               //   that are nearest to the hit.
         if (possibleX != null)
         {
             return possibleX;
         }
 
-        c = Game.s_player.Board.GetCoordinate(x, y);
+        c = board.GetCoordinate(x, y);
         if (c.Status != "Hit" && c.Status != "Miss")
         {
             return c;
@@ -42,40 +49,38 @@ public class Bot() : Person("Bot")
         return null;
     }
 
-    private Coordinate? SearchX(int shipCount)
+    private Coordinate? SearchX(Board board, int shipCount)
     {
-        List<Coordinate> hits = Game.s_player.Board.CoordinateLayout.Where(c =>
+        List<Coordinate> hits = board.CoordinateLayout.Where(c =>
             c.ToText() == "|_X|").ToList();
 
         if (hits.Count != 0)
         {
             foreach (var x in hits)
             {
-                SearchOrientation(x);   //    Checks if there are any hits
+                SearchOrientation(board, x);   //    Checks if there are any hits
                                         //    near the C and sets the guess
                                         //    orientation
 
                 List<Coordinate> cNearX;
-                if (GuessAxis != null && shipCount == Game.s_player.Score.ShipCount)
+                if (GuessAxis != null)
                 {   //  Returns the available coords from the guess axis
                     List<Coordinate> pool;
                     if (GuessAxis == "y")
                     {
-                        pool = Game.s_player.Board.CoordinateLayout.Where(c => c.XValue == x.XValue).ToList();
+                        pool = board.CoordinateLayout.Where(c => c.XValue == x.XValue).ToList();
                     }
                     else
                     {
-                        pool = Game.s_player.Board.CoordinateLayout.Where(c => c.YValue == x.YValue).ToList();
+                        pool = board.CoordinateLayout.Where(c => c.YValue == x.YValue).ToList();
                     }
-
-                    GuessAxis = null;
                     
                     cNearX = pool.Where(c => Coordinate.CIsNextToAnotherC(x, c) 
                                              && c.ToText() != "|_X|" && c.ToText() != "|_O|").ToList();
                 }
                 else
                 {   //  If there aren't any previous hits near the last hit
-                    cNearX = Game.s_player.Board.CoordinateLayout.Where(c =>
+                    cNearX = board.CoordinateLayout.Where(c =>
                         Coordinate.CIsNextToAnotherC(x, c) && c.ToText() != "|_X|"
                                                            && c.ToText() != "|_O|").ToList();
                 }
@@ -89,11 +94,11 @@ public class Bot() : Person("Bot")
         return null;
     }
 
-    private void SearchOrientation(Coordinate? x)
+    private void SearchOrientation(Board board, Coordinate? x)
     {
         if (GuessAxis == null)
         {
-            var xNearX = Game.s_player.Board.CoordinateLayout.FirstOrDefault(c =>
+            var xNearX = board.CoordinateLayout.FirstOrDefault(c =>
                 Coordinate.CIsNextToAnotherC(x, c) && c.ToText() == "|_X|");
 
             if (xNearX != null)
