@@ -2,32 +2,46 @@
 
 public partial class MainPage : ContentPage
 {
-    int count = 0;
-
     public MainPage()
     {
         InitializeComponent();
     }
 
-    private void OnCounterClicked(object? sender, EventArgs e)
+    private async void OnStartGameClicked(object? sender, EventArgs e)
     {
-        count++;
-        
-        //  SemanticScreenReader.Announce(CounterBtn.Text);
+        try
+        {
+            await Navigation.PushAsync(new DeployPage());
+        }
+        catch (Exception x)
+        {
+            await DisplayAlert("DEBUG EXCEPTION", $"{x.Message}\n\nStack:\n{x.StackTrace}", "Dismiss");
+        }
     }
 
-    private void OnStartGameClicked(object? sender, EventArgs e)
+    private async void OnExitGameClicked(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await DisplayAlert("EXIT MESSAGE", "YOU WANT TO EXIT? YEAH FINE GO AWAY THEN...", "DON'T CLICK", "DON'T CLICK");
+            Thread.Sleep(1000);
+            Environment.Exit(0);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("DEBUG EXCEPTION", $"{ex.Message}\n\nStack:\n{ex.StackTrace}", "Dismiss");
+        }
     }
 
-    private void OnExitGameClicked(object? sender, EventArgs e)
+    private async void OnHowToPlayClicked(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
-    }
-
-    private void OnHowToPlayClicked(object? sender, EventArgs e)
-    {
-        throw new NotImplementedException();
+        try
+        {
+            await Navigation.PushAsync(new RulesPage());
+        }
+        catch (Exception x)
+        {
+            await DisplayAlert("DEBUG EXCEPTION", $"{x.Message}\n\nStack:\n{x.StackTrace}", "Dismiss");
+        }
     }
 }

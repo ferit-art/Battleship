@@ -22,8 +22,9 @@
             <!-- TITLE HEADER -->
             <!-- Row 1 in the grid layout -->
             <VerticalStackLayout 
+                Margin="0, 7, 0, 0"
                 Grid.Row="0"    
-                Spacing="6"
+                Spacing="8"
                 HorizontalOptions="Center">
 
             <Label
@@ -35,8 +36,9 @@
                 CharacterSpacing="2"/>
             
             <Label
-                Text="TRADITIONAL FLEET COMMAND SIMULATION"
+                Text="FLEET COMMAND SIMULATION"
                 FontSize="13"
+                FontAttributes="Bold"
                 TextColor="#80DEEA"
                 HorizontalOptions="Center"
                 CharacterSpacing="2"/>
@@ -47,57 +49,98 @@
             <VerticalStackLayout
                 Grid.Row="1"
                 VerticalOptions="Center"
-                Spacing="16"
+                Spacing="20"
                 Padding="20,0">
                 
-                <!-- START BUTTON -->
-                <Button
-                    x:Name="StartBtn"
-                    ImageSource="button_img.jpg"
-                    Text="START GAME" 
-                    FontSize="18"
-                    FontAttributes="Bold"
-                    TextColor="#FFFFFF"
-                    BackgroundColor="#CC004D40"
-                    BorderColor="#00E5FF"
-                    BorderWidth="1.5"
-                    CornerRadius="8"
-                    HeightRequest="56"
-                    CharacterSpacing="2"
-                    SemanticProperties.Hint="Starts the game, making the app to present the next scene"
-                    Clicked="OnStartGameClicked"/>
+                <!-- START BUTTON LAYERS -->
+                <Grid
+                    HeightRequest="65"
+                    WidthRequest="240"
+                    HorizontalOptions="Center">
+                    
+                    <!-- BUTTON BACKGROUND -->
+                    <Image
+                        Source="button_img.jpg"
+                        Aspect="Fill"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"/>
+                    
+                    <!-- THE BUTTON ITSELF(IN TEXT) -->
+                    <Button
+                        Text="START GAME" 
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="Transparent"
+                        BorderWidth="0"
+                        CornerRadius="8"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        HeightRequest="56"
+                        CharacterSpacing="2"
+                        SemanticProperties.Hint="Starts the game, making the app to present the next scene"
+                        Clicked="OnStartGameClicked"/>
+                </Grid>
             
-                <!-- RULES BUTTON -->
-                <Button
-                    x:Name="RulesBtn"
-                    Text="HOW TO PLAY" 
-                    FontSize="18"
-                    FontAttributes="Bold"
-                    TextColor="#FFFFFF"
-                    BackgroundColor="#CC004D40"
-                    BorderColor="#00E5FF"
-                    BorderWidth="1.5"
-                    CornerRadius="8"
-                    HeightRequest="56"
-                    CharacterSpacing="2"
-                    SemanticProperties.Hint="Explains the controlls and rules of the game."
-                    Clicked="OnHowToPlayClicked"/>
+                <!-- RULES BUTTON LAYERS -->
+                <Grid
+                    HeightRequest="65"
+                    WidthRequest="240"
+                    HorizontalOptions="Center">
+                    
+                    <!-- BUTTON BACKGROUND -->
+                    <Image
+                        Source="button_img.jpg"
+                        Aspect="Fill"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"/>
+                    
+                    <!-- RULES BUTTON(IN TEXT) -->
+                    <Button
+                        Text="HOW TO PLAY" 
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="Transparent"
+                        BorderWidth="0"
+                        CornerRadius="8"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        HeightRequest="56"
+                        CharacterSpacing="2"
+                        SemanticProperties.Hint="Explains the controlls and rules of the game."
+                        Clicked="OnHowToPlayClicked"/>
+                </Grid>
             
-                <!-- EXIT BUTTON -->
-                <Button
-                    x:Name="ExitBtn"
-                    Text="EXIT GAME" 
-                    FontSize="18"
-                    FontAttributes="Bold"
-                    TextColor="#FFFFFF"
-                    BackgroundColor="#CC004D40"
-                    BorderColor="#00E5FF"
-                    BorderWidth="1.5"
-                    CornerRadius="8"
-                    HeightRequest="56"
-                    CharacterSpacing="2"
-                    SemanticProperties.Hint="Exits the game."
-                    Clicked="OnExitGameClicked"/>
+                <!-- EXIT BUTTON LAYERS -->
+                <Grid
+                    HeightRequest="65"
+                    WidthRequest="240"
+                    HorizontalOptions="Center">
+                    
+                    <!-- BUTTON BACKGROUND -->
+                    <Image
+                        Source="button_img.jpg"
+                        Aspect="Fill"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"/>
+                    
+                    <!-- EXIT BUTTON(IN TEXT) -->
+                    <Button
+                        Text="EXIT GAME" 
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="Transparent"
+                        BorderWidth="0"
+                        CornerRadius="8"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        HeightRequest="56"
+                        CharacterSpacing="2"
+                        SemanticProperties.Hint="Exits the game."
+                        Clicked="OnExitGameClicked"/>
+                </Grid>
             </VerticalStackLayout>
             
             <!-- VERSION FOOTER -->
