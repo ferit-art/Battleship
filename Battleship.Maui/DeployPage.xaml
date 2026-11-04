@@ -6,11 +6,92 @@
              Shell.NavBarIsVisible="False"
              BackgroundColor="#020B14">
 
-    <Grid
-        x:Name="DeployGrid"
-        WidthRequest="330"
-        HeightRequest="330"
-        HorizontalOptions="Center"
-        VerticalOptions="Center">
+    <Grid>
+        
+        <!-- BACKGROUND LAYER -->
+        <Image
+            Source="deploy_page_bg.jpg"
+            Aspect="AspectFill"
+            SemanticProperties.Description="Background image for the deploy page"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
+
+        <!-- UI CONTENT LAYER -->
+        <Grid
+            RowDefinitions="Auto, Auto, Auto, *, Auto"
+            Padding="24, 60, 24, 40">
+
+            <!-- TITLE HEADER -->
+            <!-- Row 1 in the grid layout -->
+            <VerticalStackLayout
+                Margin="0, 7, 0, 0"
+                Grid.Row="0"
+                Spacing="8"
+                HorizontalOptions="Center">
+
+                <Label
+                    Text="DEPLOYMENT GRID"
+                    FontSize="42"
+                    FontAttributes="Bold"
+                    TextColor="#E0F7FA"
+                    HorizontalOptions="Center"
+                    CharacterSpacing="2" />
+
+            </VerticalStackLayout>
+            
+            <!-- INVENTORY -->
+            <!-- Row 2 -->
+            <VerticalStackLayout
+                Grid.Row="1"
+                VerticalOptions="Center"
+                Spacing="20"
+                Padding="20,0">
+                
+                <Label
+                    Text="INVENTORY"
+                    FontAttributes="Bold"
+                    CharacterSpacing="1"
+                    FontSize="13"/>
+            </VerticalStackLayout>
+            
+            <!-- AVAILABLE SHIPS -->
+            <!-- Row 3 -->
+            <VerticalStackLayout
+                Grid.Row="2"
+                WidthRequest="330"
+                HeightRequest="330"
+                HorizontalOptions="Center"
+                Spacing="20">
+                
+                <Grid
+                    x:Name="ShipInventory"
+                    HorizontalOptions="Center">
+                    
+                </Grid>
+                
+            </VerticalStackLayout>
+            
+            <!-- THE DEPLOYMENT GRID -->
+            <!-- Row 4 -->
+            <VerticalStackLayout
+                Grid.Row="3"
+                WidthRequest="330"
+                HeightRequest="330"
+                HorizontalOptions="Center">
+                
+                <!--TODO: ADD THE NUMBERS ON TOP
+                AND THE CHARS ON THE SIDE IN A HORIZONTAL STACKLAYOUT-->
+                
+                <!-- <Label -->
+                <!--     Text="   "/> -->
+                <Grid
+                    x:Name="DeployGrid"
+                    WidthRequest="330"
+                    HeightRequest="330"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
     </Grid>
 </ContentPage>

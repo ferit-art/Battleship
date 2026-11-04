@@ -61,6 +61,7 @@
                     Spacing="15"
                     Padding="30, 50"
                     VerticalOptions="Center">
+                    
                     <Label
                         Text="There are five types of ships in the fleet:&#10;&#x25AA; Carrier — 5 cells&#10;&#x25AA; Battleship — 4 cells&#10;&#x25AA; Destroyer — 3 cells&#10;&#x25AA; Submarine — 3 cells&#10;&#x25AA; Patrol Boat — 2 cells"
                         HorizontalTextAlignment="Start"
@@ -118,7 +119,7 @@
                     VerticalOptions="Fill"
                     HeightRequest="56"
                     CharacterSpacing="2"
-                    SemanticProperties.Hint="Starts the game, making the app to present the next scene"
+                    SemanticProperties.Hint="Goes back to the start menu."
                     Clicked="OnGoBackClicked" />
             </Grid>
         </VerticalStackLayout>

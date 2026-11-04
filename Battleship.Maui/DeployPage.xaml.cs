@@ -62,6 +62,11 @@ public partial class DeployPage : ContentPage
             dynamic c = btn.BindingContext;
             int x = c.X;
             int y = c.Y;
+            
+            //  Feedback
+            btn.BorderColor = Colors.Cyan;
         }
     }
+    
+    
 }
