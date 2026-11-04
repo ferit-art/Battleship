@@ -8,7 +8,7 @@
     <Grid>
         <!-- BACKGROUND LAYER -->   
         <Image
-            Source="menu_bg.jpg"
+            Source="main_page_bg.jpg"
             Aspect="AspectFill"
             SemanticProperties.Description="Background image for the start menu"
             HorizontalOptions="Fill"

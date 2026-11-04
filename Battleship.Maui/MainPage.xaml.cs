@@ -24,7 +24,7 @@ public partial class MainPage : ContentPage
         try
         {
             await DisplayAlert("EXIT MESSAGE", "YOU WANT TO EXIT? YEAH FINE GO AWAY THEN...", "DON'T CLICK", "DON'T CLICK");
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             Environment.Exit(0);
         }
         catch (Exception ex)
