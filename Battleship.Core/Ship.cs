@@ -2,11 +2,11 @@ namespace Battleship;
 
 public abstract class Ship
 {
-    public string Name { get; }
+    public string Name { get; set; }
     public Person Owner { get; }
-    public List<Coordinate> Location { get; }   //  Change to private later.
+    public List<Coordinate> Location { get; set; }   //  Change to private later.
     public bool Sunken { get; private set; }
-    
+
     protected Ship(string name, Person owner, List<Coordinate> location)
     {
         Name = name;

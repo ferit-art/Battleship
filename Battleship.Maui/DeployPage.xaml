@@ -11,14 +11,14 @@
         <!-- BACKGROUND LAYER -->
         <Image
             Source="deploy_page_bg.jpg"
-            Aspect="AspectFill"
+            Aspect="Fill"
             SemanticProperties.Description="Background image for the deploy page"
             HorizontalOptions="Fill"
             VerticalOptions="Fill" />
 
         <!-- UI CONTENT LAYER -->
         <Grid
-            RowDefinitions="Auto, Auto, Auto, *, Auto"
+            RowDefinitions="Auto, Auto, Auto, *"
             Padding="24, 60, 24, 40">
 
             <!-- TITLE HEADER -->
@@ -34,6 +34,7 @@
                     FontSize="42"
                     FontAttributes="Bold"
                     TextColor="#E0F7FA"
+                    HorizontalTextAlignment="Center"
                     HorizontalOptions="Center"
                     CharacterSpacing="2" />
 
@@ -49,6 +50,7 @@
                 
                 <Label
                     Text="INVENTORY"
+                    TextColor="#E0F7FA"
                     FontAttributes="Bold"
                     CharacterSpacing="1"
                     FontSize="13"/>
@@ -58,14 +60,14 @@
             <!-- Row 3 -->
             <VerticalStackLayout
                 Grid.Row="2"
+                Margin="0, 5"
                 WidthRequest="330"
                 HeightRequest="330"
-                HorizontalOptions="Center"
                 Spacing="20">
                 
                 <Grid
                     x:Name="ShipInventory"
-                    HorizontalOptions="Center">
+                    HorizontalOptions="Start">
                     
                 </Grid>
                 
@@ -78,9 +80,6 @@
                 WidthRequest="330"
                 HeightRequest="330"
                 HorizontalOptions="Center">
-                
-                <!--TODO: ADD THE NUMBERS ON TOP
-                AND THE CHARS ON THE SIDE IN A HORIZONTAL STACKLAYOUT-->
                 
                 <!-- <Label -->
                 <!--     Text="   "/> -->

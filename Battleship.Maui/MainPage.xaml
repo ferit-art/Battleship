@@ -11,7 +11,7 @@
             Source="main_page_bg.jpg"
             Aspect="AspectFill"
             SemanticProperties.Description="Background image for the start menu"
-            HorizontalOptions="Fill"
+            HorizontalOptions="FillAndExpand"
             VerticalOptions="Fill"/>
         
         <!-- UI CONTENT LAYER -->

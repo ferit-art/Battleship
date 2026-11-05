@@ -155,10 +155,7 @@ public class GameManager
         return true;
     }
 
-    private List<Coordinate> AskShipCoordinates(int length) //  TODO:   CHECK IF THE CHOSEN LENGHT FITS
-        //  TODO:   THE REST OF THE C's IN THE DIRE
-        //  TODO:   CTION OF THE 1. AND 2. C. OTHERWISE
-        //  TODO:   THE USER IS SOFTLOCKED.
+    private List<Coordinate> AskShipCoordinates(int length)
     {
         string letters = "ABCDEFGHIJ";
         List<Coordinate> location = new();
