@@ -19,18 +19,18 @@
         <!-- UI CONTENT LAYER -->
         <Grid
             RowDefinitions="Auto, Auto, Auto, *"
-            Padding="24, 60, 24, 40">
+            Padding="20, 30, 20, 40">
 
             <!-- TITLE HEADER -->
             <!-- Row 1 in the grid layout -->
             <VerticalStackLayout
-                Margin="0, 7, 0, 0"
                 Grid.Row="0"
                 Spacing="8"
                 HorizontalOptions="Center">
 
                 <Label
                     Text="DEPLOYMENT GRID"
+                    LineHeight="0.8"
                     FontSize="42"
                     FontAttributes="Bold"
                     TextColor="#E0F7FA"
@@ -45,8 +45,8 @@
             <VerticalStackLayout
                 Grid.Row="1"
                 VerticalOptions="Center"
-                Spacing="20"
-                Padding="20,0">
+                Padding="20,5"
+                Margin="0, 100, 0, 0">
                 
                 <Label
                     Text="INVENTORY"
@@ -61,34 +61,64 @@
             <VerticalStackLayout
                 Grid.Row="2"
                 Margin="0, 5"
-                WidthRequest="330"
-                HeightRequest="330"
+                WidthRequest="360"
                 Spacing="20">
                 
                 <Grid
                     x:Name="ShipInventory"
-                    HorizontalOptions="Start">
+                    HeightRequest="50"
+                    HorizontalOptions="Center">
                     
                 </Grid>
                 
             </VerticalStackLayout>
             
-            <!-- THE DEPLOYMENT GRID -->
             <!-- Row 4 -->
             <VerticalStackLayout
                 Grid.Row="3"
-                WidthRequest="330"
-                HeightRequest="330"
+                Margin="0, 15,0,0"
                 HorizontalOptions="Center">
                 
-                <!-- <Label -->
-                <!--     Text="   "/> -->
+                <!-- THE DEPLOYMENT GRID -->
                 <Grid
                     x:Name="DeployGrid"
-                    WidthRequest="330"
-                    HeightRequest="330"
+                    WidthRequest="360"
+                    HeightRequest="424"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
+                </Grid>
+                
+                <!-- DEPLOY BUTTON LAYERS -->
+                <Grid
+                    Padding="4"
+                    HeightRequest="40"
+                    WidthRequest="200"
+                    HorizontalOptions="Center">
+                    
+                    <!-- BUTTON BACKGROUND -->
+                    <Image
+                        Source="button_img.jpg"
+                        Aspect="Fill"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"/>
+                    
+                    <!-- DEPLOY BUTTON(IN TEXT) -->
+                    <Button
+                        x:Name="DeployBtn"
+                        Text="DEPLOY" 
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="Transparent"
+                        BorderWidth="0"
+                        CornerRadius="8"
+                        InputTransparent="true"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        HeightRequest="56"
+                        CharacterSpacing="2"
+                        SemanticProperties.Hint="Deploys the fleet into the game and starts the round."
+                        Clicked="OnDeployClicked"/>
                 </Grid>
             </VerticalStackLayout>
         </Grid>

@@ -10,20 +10,21 @@ namespace Battleship.Maui;
 public partial class DeployPage : ContentPage
 {
     private Player _player = new();
+    private Bot _bot = new();
     private List<Coordinate> _currentShipLocation = new();
     private Ship _currentShip;
 
     public DeployPage()
     {
         InitializeComponent();
-        UpdateInventoryUI();
+        UpdateUi();
         BuildBoardGrid();
     }
     
-    private void UpdateInventoryUI()
+    private void UpdateUi()
     {
         ShipInventory.Children.Clear();
-        ShipInventory.RowDefinitions.Clear();
+        ShipInventory.ColumnDefinitions.Clear();
 
         Ship[] allShips =
         {
@@ -34,35 +35,41 @@ public partial class DeployPage : ContentPage
             new PatrolBoat(_player, new List<Coordinate>())
         };
 
-        var remainingShips = allShips.Where(s => !_player._ships.Any(ps => ps.Name == s.Name)).ToArray();
+        var remainingShips = allShips.Where(s => !_player.Ships.Any(ps => ps.Name == s.Name)).ToArray();
 
         foreach (var unused in remainingShips)
         {
-            ShipInventory.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
+            ShipInventory.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
         }
 
-        for (int row = 0; row < remainingShips.Length; row++)
+        for (int col = 0; col < remainingShips.Length; col++)
         {
-            var ship = remainingShips[row];
+            var ship = remainingShips[col];
 
             var shipButton = new Button
             {
                 Text = ship.Name,
+                FontAttributes = FontAttributes.Bold,
                 BackgroundColor = Color.FromArgb("#020B14"),
                 BorderColor = Color.FromArgb("#1E3A5F"),
                 BorderWidth = 1,
-                FontSize = 10,
-                Padding = 2,
+                FontSize = 14,
+                Padding = 10,
                 Margin = 2,
                 BindingContext = ship
             };
 
             shipButton.Clicked += OnShipClicked;
             
-            Grid.SetRow(shipButton, row);
-            Grid.SetColumn(shipButton, 0);
+            Grid.SetColumn(shipButton, col);
+            Grid.SetRow(shipButton, 0);
             
             ShipInventory.Children.Add(shipButton);
+        }
+
+        if (remainingShips.Length == 0)
+        {
+            DeployBtn.InputTransparent = false;
         }
     }
 
@@ -71,7 +78,7 @@ public partial class DeployPage : ContentPage
         //  Add 10 rows and 10 columns to the DeployGrid
         for (int i = 0; i < 10; i++)
         {
-            DeployGrid.RowDefinitions.Add(new RowDefinition{ Height = GridLength.Star});
+            DeployGrid.RowDefinitions.Add(new RowDefinition{ Height = GridLength.Star});    //  Star = Equal parts
             DeployGrid.ColumnDefinitions.Add(new ColumnDefinition{ Width = GridLength.Star});
         }
         
@@ -137,12 +144,12 @@ public partial class DeployPage : ContentPage
                         coord.ChangeStatus("Ship");
                     }
 
-                    _currentShip.Location = _currentShipLocation;
+                    _currentShip.Location = new List<Coordinate>(_currentShipLocation);
                     _player.AddShip(_currentShip);
                     _currentShip = null;
                     _currentShipLocation.Clear();
                     
-                    UpdateInventoryUI();
+                    UpdateUi();
                 }
                 
                 //  Feedback
@@ -178,22 +185,22 @@ public partial class DeployPage : ContentPage
 
                     string direction = c.YValue > _currentShipLocation.First().YValue ? "Downwards" : "Upwards";
 
-                    var pool = _player.Board.CoordinateLayout.Where(x => x.XValue == c.XValue && x.YValue <= c.YValue && x.ToText() == "|__|");
+                    var pool = _player.Board.CoordinateLayout.Where(x => x.XValue == c.XValue && x.YValue <= c.YValue && x.YValue >= 1 && x.ToText() == "|__|");
                     
                     if (direction == "Downwards")
                     {
-                        pool = _player.Board.CoordinateLayout.Where(x => x.XValue == c.XValue && x.YValue >= c.YValue && x.ToText() == "|__|");
+                        pool = _player.Board.CoordinateLayout.Where(x => x.XValue == c.XValue && x.YValue >= c.YValue && x.YValue <= 10 && x.ToText() == "|__|");
                     }
                     
                     if (isHorizontal)
                     {
                         direction = c.XValue > _currentShipLocation.First().XValue ? "To right" : "To left";
                         
-                        pool = _player.Board.CoordinateLayout.Where(x => x.YValue == c.YValue && x.XValue <= c.XValue && x.ToText() == "|__|");
+                        pool = _player.Board.CoordinateLayout.Where(x => x.YValue == c.YValue && x.XValue <= c.XValue && x.XValue >= 1 && x.ToText() == "|__|");
                         
                         if (direction == "To right")
                         {
-                            pool = _player.Board.CoordinateLayout.Where(x => x.YValue == c.YValue && x.XValue >= c.XValue && x.ToText() == "|__|");
+                            pool = _player.Board.CoordinateLayout.Where(x => x.YValue == c.YValue && x.XValue >= c.XValue && x.XValue <= 10 && x.ToText() == "|__|");
                         }
                     }
                     
@@ -255,6 +262,25 @@ public partial class DeployPage : ContentPage
                 return 2;
             default:
                 return 0;
+        }
+    }
+
+    private void BotPlacesShips()
+    {
+        _bot.PlaceShips();
+    }
+
+    private async void OnDeployClicked(object? sender, EventArgs e)
+    {
+        await Task.Delay(2000);
+        try
+        {
+            BotPlacesShips();
+            await Navigation.PushAsync(new FinalPage(_player, _bot));
+        }
+        catch (Exception x)
+        {
+            await DisplayAlert("DEBUG EXCEPTION", $"{x.Message}\n\nStack:\n{x.StackTrace}", "Dismiss");
         }
     }
 }

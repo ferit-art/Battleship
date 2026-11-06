@@ -60,18 +60,18 @@ public class GameManager
         Console.WriteLine();
         Console.WriteLine($"{indent}Available Ships to place:");
 
-        if (Game.s_player._ships.Count != 0)
+        if (Game.s_player.Ships.Count != 0)
         {
             foreach (var shipToPlace in shipsToPlace)
             {
-                if (!Game.s_player._ships.Any(s => s.Name == shipToPlace))
+                if (!Game.s_player.Ships.Any(s => s.Name == shipToPlace))
                 {
                     Console.WriteLine($"{indent}[{shipsToPlace.IndexOf(shipToPlace) + 1}] " +
                                       $"{shipToPlace}");
                 }
             }
 
-            if (Game.s_player._ships.Count == 5)
+            if (Game.s_player.Ships.Count == 5)
             {
                 AllShipsArePlaced = true;
                 Console.WriteLine($"{indent}None left");
@@ -147,7 +147,7 @@ public class GameManager
 
     public static bool ChoiceIsNotPlaced(Person person, string ship)
     {
-        if (person._ships.Any(s => s.Name == ship))
+        if (person.Ships.Any(s => s.Name == ship))
         {
             return false;
         }
@@ -335,7 +335,7 @@ public class GameManager
 
     private void PrintFleetHealthBar(Person person)
     {
-        int aliveCount = person._ships.Count(s => !s.Sunken);
+        int aliveCount = person.Ships.Count(s => !s.Sunken);
         int sunkCount = 5 - aliveCount;
 
         // 8-character wide slices for each row
@@ -462,7 +462,7 @@ public class GameManager
     public void WinCheck(Person attacker, Person target)
     {
         Person? winner;
-        if (target._ships.All(s => s.Sunken))
+        if (target.Ships.All(s => s.Sunken))
         {
             attacker.HasWon = true;
             winner = attacker;
@@ -505,7 +505,7 @@ public class GameManager
             }
             person.HasWon = false;
             person.Score.ShipCount = 5;
-            person._ships.Clear();
+            person.Ships.Clear();
         }
     }
 
