@@ -168,7 +168,7 @@ public partial class FinalPage : ContentPage
         }
     }
 
-    private void WinCheck(Person attacker, Person target)
+    private async void WinCheck(Person attacker, Person target)
     {
         Person? winner;
         if (target.Ships.All(s => s.Sunken))
@@ -183,7 +183,7 @@ public partial class FinalPage : ContentPage
         
         if (winner != null)
         {
-            Task.Delay(2000);
+            await Task.Delay(2000);
             _gameActive = false;
             attacker.HasAHit = false;
         }

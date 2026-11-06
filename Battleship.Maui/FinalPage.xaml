@@ -36,7 +36,6 @@
             <VerticalStackLayout
                 Grid.Row="1"
                 Margin="27, 58, 0, 0"
-                HeightRequest="50"
                 HorizontalOptions="Center">
                 
                 <!-- PLAYER GRID -->

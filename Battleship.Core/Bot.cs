@@ -106,6 +106,10 @@ public class Bot() : Person("Bot")
                 Debug.Assert(x != null, nameof(x) + " != null");
                 GuessAxis = xNearX.XValue == x.XValue ? "y" : "x";
             }
+            else
+            {
+                GuessAxis = null;
+            }
         }
     }
 
